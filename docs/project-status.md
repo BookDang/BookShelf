@@ -1,23 +1,27 @@
 # Tiến độ dự án — BookShelf
 
 > **Cập nhật lần cuối:** 28/11/2026  
-> **Giai đoạn hiện tại:** 2. Phân tích yêu cầu — gần hoàn tất, chờ xác nhận và phê duyệt
+> **Mô hình phát triển:** Agile (Scrum), sprint 2 tuần  
+> **Giai đoạn hiện tại:** 2. Phân tích yêu cầu — gần hoàn tất, chờ xác nhận và phê duyệt  
+> **Tiếp theo:** Sprint 0 — chuẩn bị nền tảng kỹ thuật
 
-Tài liệu theo dõi dự án đang ở giai đoạn nào của vòng đời phát triển phần mềm (SDLC), những việc đã xong, những việc còn lại và việc tiếp theo.
+Tài liệu theo dõi dự án đang ở đâu trong vòng đời phát triển phần mềm (SDLC), những việc đã xong, những việc còn lại và lộ trình các sprint.
 
 **Ký hiệu trạng thái:** ✅ Hoàn thành · 🟡 Đang thực hiện · 🟠 Làm một phần · ⬜ Chưa bắt đầu
 
 ## 1. Tổng quan theo SDLC
 
-| # | Giai đoạn | Trạng thái | Đầu ra chính | Issue |
+Dự án theo mô hình Agile: sau khi chốt yêu cầu ban đầu, các giai đoạn Thiết kế, Phát triển và Kiểm thử được lặp lại trong từng sprint thay vì làm tuần tự một lần.
+
+| # | Giai đoạn | Trạng thái | Cách thực hiện | Issue |
 |---|---|---|---|---|
-| 1 | Lập kế hoạch (Planning) | 🟠 Làm một phần | Mục tiêu, phạm vi MVP và phần ngoài phạm vi (trong issue #1). Chưa có kế hoạch tiến độ, nguồn lực, đánh giá khả thi. | — |
-| 2 | **Phân tích yêu cầu (Requirements)** | 🟡 **Đang thực hiện** | [docs/requirements/](requirements/) | [#1](https://github.com/BookDang/BookShelf/issues/1) |
-| 3 | Thiết kế (Design) | ⬜ Chưa bắt đầu | Kiến trúc, công nghệ, cơ sở dữ liệu, API, UI/UX | Chưa tạo |
-| 4 | Phát triển (Implementation) | ⬜ Chưa bắt đầu | Mã nguồn MVP | Chưa tạo |
-| 5 | Kiểm thử (Testing) | ⬜ Chưa bắt đầu | Kết quả kiểm thử theo tiêu chí nghiệm thu và NFR | Chưa tạo |
-| 6 | Triển khai (Deployment) | ⬜ Chưa bắt đầu | Hệ thống chạy trên môi trường thật | Chưa tạo |
-| 7 | Vận hành, bảo trì (Maintenance) | ⬜ Chưa bắt đầu | Theo dõi, sao lưu, xử lý sự cố | — |
+| 1 | Lập kế hoạch (Planning) | 🟠 Làm một phần | Mục tiêu, phạm vi MVP và phần ngoài phạm vi trong issue #1; lộ trình sprint tại mục 4. Chưa có ước lượng nguồn lực và thời gian cụ thể. | — |
+| 2 | **Phân tích yêu cầu (Requirements)** | 🟡 **Đang thực hiện** | Bộ tài liệu yêu cầu ban đầu tại [docs/requirements/](requirements/). Được tinh chỉnh tiếp qua phản hồi sau mỗi sprint. | [#1](https://github.com/BookDang/BookShelf/issues/1) |
+| 3 | Thiết kế (Design) | ⬜ Chưa bắt đầu | Phần nền tảng (kiến trúc, công nghệ, khung dữ liệu) ở Sprint 0; thiết kế chi tiết của từng tính năng trong sprint thực hiện tính năng đó. | Chưa tạo |
+| 4 | Phát triển (Implementation) | ⬜ Chưa bắt đầu | Sprint 1 → Sprint 7 (mục 4). | Chưa tạo |
+| 5 | Kiểm thử (Testing) | ⬜ Chưa bắt đầu | Kiểm thử trong từng sprint theo Định nghĩa Hoàn thành (mục 3.2); kiểm thử tải, bảo mật và nghiệm thu MVP ở Sprint 7. | Chưa tạo |
+| 6 | Triển khai (Deployment) | ⬜ Chưa bắt đầu | Sau khi nghiệm thu MVP (mục 5). | Chưa tạo |
+| 7 | Vận hành, bảo trì (Maintenance) | ⬜ Chưa bắt đầu | Theo dõi, sao lưu, xử lý sự cố. | — |
 
 ## 2. Giai đoạn hiện tại: Phân tích yêu cầu
 
@@ -47,62 +51,207 @@ Số liệu trên tính tại thời điểm cập nhật. Các tài liệu đã
 
 Chi tiết tại mục 9 của [user-stories.md](requirements/user-stories.md).
 
-- [ ] **OI-01** — Giá trị chính sách MVP: 5 bản, 14 ngày, cách xử lý sách mất và hư hỏng, thời hạn thành viên.
-- [ ] **OI-02** — Quy mô hệ thống dự kiến (đầu sách, bản sách, độc giả, người dùng đồng thời).
-- [ ] **OI-03** — Mức sẵn sàng 99,5% và RPO 24 giờ.
-- [ ] **OI-04** — Có cần chuyển dữ liệu sách và độc giả hiện có vào hệ thống không. Nếu có, cần bổ sung yêu cầu nhập dữ liệu hàng loạt vào MVP.
-- [ ] **OI-05** — Nhân viên đồng thời là độc giả phải dùng hai tài khoản với hai email khác nhau.
+| ID | Nội dung | Cần trước |
+|---|---|---|
+| OI-01 | Giá trị chính sách MVP: 5 bản, 14 ngày, cách xử lý sách mất và hư hỏng, thời hạn thành viên. | Sprint 4 |
+| OI-02 | Quy mô hệ thống dự kiến (đầu sách, bản sách, độc giả, người dùng đồng thời). | Sprint 0 (ảnh hưởng kiến trúc) |
+| OI-03 | Mức sẵn sàng 99,5% và RPO 24 giờ. | Sprint 0 (ảnh hưởng kiến trúc) |
+| OI-04 | Có cần chuyển dữ liệu sách và độc giả hiện có vào hệ thống không. Nếu có, cần bổ sung yêu cầu nhập dữ liệu hàng loạt vào MVP. | Sprint 2 |
+| OI-05 | Nhân viên đồng thời là độc giả phải dùng hai tài khoản với hai email khác nhau. | Sprint 1 |
+
+- [ ] OI-01 · [ ] OI-02 · [ ] OI-03 · [ ] OI-04 · [ ] OI-05
 
 ### 2.4. Việc cần làm để kết thúc giai đoạn
 
-1. Thư viện xác nhận các vấn đề OI-01 → OI-05; cập nhật tài liệu theo kết quả.
+1. Thư viện xác nhận các vấn đề OI-01 → OI-05 (ưu tiên những mục cần trước Sprint 0); cập nhật tài liệu theo kết quả.
 2. Các bên liên quan rà soát và phê duyệt; đánh dấu bộ tài liệu là **baseline v1.0**. Từ đây mọi thay đổi yêu cầu phải được ghi nhận và phê duyệt.
 3. Commit các thay đổi phát sinh sau rà soát và đóng issue #1.
 
-## 3. Giai đoạn tiếp theo: Thiết kế
+Sprint 0 có thể bắt đầu song song với bước 1 và 2.
 
-Đề xuất tạo các issue sau. Cột "Đầu vào" chỉ ra phần tài liệu yêu cầu cần dùng.
+## 3. Sprint 0: Chuẩn bị nền tảng
 
-| Hạng mục | Đầu vào chính | Issue |
+### 3.1. Hạng mục
+
+| Hạng mục | Đầu vào chính | Trạng thái | Issue |
+|---|---|---|---|
+| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | ⬜ | Chưa tạo |
+| Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | Chưa tạo |
+| Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | Chưa tạo |
+| Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | Chưa tạo |
+| Khung giao diện và quy ước UI | NFR-07, NFR-08 | ⬜ | Chưa tạo |
+| Repo, CI chạy kiểm thử tự động, migration | NFR-06-03, NFR-06-04 | ⬜ | Chưa tạo |
+| Môi trường phát triển và kiểm thử; dịch vụ email cho môi trường phát triển | NFR-06-05, NFR-06-06; CON-03 | ⬜ | Chưa tạo |
+| Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | ⬜ | Chưa tạo |
+| Backlog trên GitHub: mỗi User Story là một issue, gắn nhãn epic và mức ưu tiên | [user-stories.md](requirements/user-stories.md) | ⬜ | Chưa tạo |
+
+**Kết quả cuối Sprint 0:** một ứng dụng khung chạy được trên môi trường kiểm thử, CI tự động chạy kiểm thử cho mỗi thay đổi, và backlog Sprint 1 đã sẵn sàng.
+
+### 3.2. Định nghĩa Hoàn thành (Definition of Done)
+
+Một User Story chỉ được coi là hoàn thành khi:
+
+- Đạt toàn bộ tiêu chí nghiệm thu của story.
+- Mỗi Business Rule liên quan có ít nhất một kiểm thử tự động (NFR-06-01).
+- Quyền truy cập được kiểm tra ở phía máy chủ (NFR-05-07); các thao tác thuộc danh sách NFR-05-08 được ghi nhật ký kiểm toán.
+- Mã nguồn đã được review và CI chạy thành công.
+- Đã được kiểm tra trên môi trường kiểm thử.
+- Tài liệu yêu cầu được cập nhật nếu có thay đổi phát sinh trong quá trình làm.
+
+## 4. Lộ trình sprint
+
+Lộ trình là dự kiến, được điều chỉnh sau mỗi buổi review sprint với thư viện. Thứ tự dựa trên mức ưu tiên và phụ thuộc giữa các chức năng (mục 5 của [functional-requirements.md](requirements/functional-requirements.md)): làm toàn bộ story Must trước để sớm có luồng nghiệp vụ chính chạy được, sau đó mới làm story Should.
+
+### 4.1. Tổng quan
+
+| Sprint | Mục tiêu | Kết quả demo | Thời gian | Trạng thái |
+|---|---|---|---|---|
+| 0 | Nền tảng kỹ thuật (mục 3) | Ứng dụng khung chạy trên môi trường kiểm thử | — | ⬜ |
+| 1 | Tài khoản và phân quyền | Quản trị viên được khởi tạo, tạo được tài khoản thủ thư; thủ thư kích hoạt và đăng nhập | — | ⬜ |
+| 2 | Danh mục và kho sách | Thủ thư nhập đầu sách, tác giả, thể loại và bản sách vào kho | — | ⬜ |
+| 3 | Độc giả | Thủ thư đăng ký độc giả; độc giả kích hoạt tài khoản | — | ⬜ |
+| 4 | Mượn và trả sách | **Mốc M1:** luồng mượn trả chạy được từ đầu đến cuối | — | ⬜ |
+| 5 | Xử lý ngoại lệ mượn trả và màn hình độc giả | Hủy và chuyển phiếu, sách mất và hư hỏng; độc giả xem sách đang mượn và lịch sử | — | ⬜ |
+| 6 | Tra cứu và báo cáo | **Mốc M2:** hoàn thành toàn bộ story Must | — | ⬜ |
+| 7 | Story Should và hoàn thiện NFR | **Mốc M3:** bản ứng viên phát hành, nghiệm thu MVP | — | ⬜ |
+
+### 4.2. Story theo sprint
+
+**Sprint 1 — Tài khoản và phân quyền** (8 story Must)
+
+| Story | Tên | Ưu tiên |
 |---|---|---|
-| Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11; ràng buộc CON-01 → CON-05 | Chưa tạo |
-| Lựa chọn công nghệ | Kiến trúc hệ thống; NFR-05, NFR-06 | Chưa tạo |
-| Thiết kế cơ sở dữ liệu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | Chưa tạo |
-| Thiết kế API | Mục 4 của FR (đầu vào, đầu ra, ngoại lệ); NFR-04, NFR-05 | Chưa tạo |
-| Thiết kế UI/UX | Tiêu chí nghiệm thu của User Stories; NFR-07, NFR-08 | Chưa tạo |
-| Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | Chưa tạo |
+| US-01-12 | Khởi tạo quản trị viên đầu tiên | Must |
+| US-01-11 | Kích hoạt tài khoản | Must |
+| US-01-01 | Đăng nhập | Must |
+| US-01-02 | Đăng xuất | Must |
+| US-01-03 | Đổi mật khẩu | Must |
+| US-01-05 | Tạo tài khoản nhân viên | Must |
+| US-01-07 | Khóa và mở khóa tài khoản | Must |
+| US-01-08 | Phân quyền người dùng | Must |
 
-## 4. Các giai đoạn sau
+**Sprint 2 — Danh mục và kho sách** (9 story Must)
 
-**Phát triển** — làm theo thứ tự đề xuất ở mục 5 của [functional-requirements.md](requirements/functional-requirements.md):
+| Story | Tên | Ưu tiên |
+|---|---|---|
+| US-02-05 | Quản lý tác giả | Must |
+| US-02-06 | Quản lý thể loại sách | Must |
+| US-02-01 | Thêm đầu sách mới | Must |
+| US-02-02 | Cập nhật thông tin đầu sách | Must |
+| US-02-04 | Xem danh sách và chi tiết đầu sách | Must |
+| US-03-01 | Nhập bản sách vật lý | Must |
+| US-03-02 | Cập nhật bản sách và vị trí lưu trữ | Must |
+| US-03-03 | Theo dõi tình trạng và trạng thái lưu hành của bản sách | Must |
+| US-03-04 | Xem số lượng bản sách sẵn có và có thể mượn | Must |
 
-1. Xác thực, phân quyền, khởi tạo quản trị viên đầu tiên (FR-01).
-2. Danh mục và kho sách (FR-02, FR-03).
-3. Độc giả và tài khoản độc giả (FR-04, FR-01-11).
-4. Cấu hình chính sách (FR-09).
-5. Mượn và trả sách (FR-05, FR-06).
-6. Tra cứu (FR-07).
-7. Báo cáo (FR-08).
+**Sprint 3 — Độc giả** (6 story Must)
 
-**Kiểm thử** — điều kiện nghiệm thu MVP: đạt toàn bộ yêu cầu Must và các yêu cầu Should chưa được duyệt hoãn (mục 6 của FR).
+| Story | Tên | Ưu tiên |
+|---|---|---|
+| US-04-01 | Đăng ký độc giả mới | Must |
+| US-04-02 | Cập nhật thông tin độc giả | Must |
+| US-04-03 | Tìm kiếm và xem thông tin độc giả | Must |
+| US-04-04 | Quản lý trạng thái thành viên | Must |
+| US-02-03 | Ngừng lưu hành đầu sách | Must |
+| US-03-05 | Ghi nhận bản sách bị mất, hư hỏng hoặc thanh lý | Must |
 
-**Triển khai** — các việc bắt buộc trước khi đưa vào sử dụng:
+**Sprint 4 — Mượn và trả sách** (7 story Must)
 
-- [ ] Cấu hình dịch vụ gửi email (CON-03).
+| Story | Tên | Ưu tiên |
+|---|---|---|
+| US-04-06 | Kiểm tra điều kiện mượn sách của độc giả | Must |
+| US-05-01 | Tạo phiếu mượn sách | Must |
+| US-05-02 | Từ chối mượn khi không đủ điều kiện | Must |
+| US-05-03 | Tự động xác định thời hạn trả sách | Must |
+| US-06-01 | Ghi nhận trả sách | Must |
+| US-06-02 | Trả từng phần trong một phiếu mượn | Must |
+| US-06-03 | Xác định trả sách quá hạn | Must |
+
+Chính sách BP-01 và BP-02 dùng giá trị mặc định trong cấu hình cho đến khi có chức năng cấu hình chính sách (US-01-10, Sprint 7).
+
+**Sprint 5 — Xử lý ngoại lệ mượn trả và màn hình độc giả** (6 Must, 1 Should)
+
+| Story | Tên | Ưu tiên |
+|---|---|---|
+| US-05-06 | Hủy phiếu mượn lập sai | Must |
+| US-05-07 | Chuyển phiếu lập sai độc giả sang đúng độc giả | Must |
+| US-06-04 | Ghi nhận sách trả về bị hư hỏng | Must |
+| US-06-05 | Ghi nhận sách đang mượn bị mất | Must |
+| US-04-05 | Xem lịch sử mượn trả và sách đang mượn của độc giả | Must |
+| US-05-05 | Độc giả xem sách đang mượn và thời hạn trả | Must |
+| US-04-07 | Độc giả xem hồ sơ và lịch sử mượn trả của bản thân | Should |
+
+**Sprint 6 — Tra cứu và báo cáo** (5 Must, 1 Should)
+
+| Story | Tên | Ưu tiên |
+|---|---|---|
+| US-07-01 | Tìm kiếm sách | Must |
+| US-07-02 | Xem chi tiết và tình trạng có thể mượn | Must |
+| US-07-03 | Thủ thư tra cứu toàn bộ danh mục | Should |
+| US-08-01 | Thống kê đầu sách và bản sách | Must |
+| US-08-02 | Báo cáo mượn trả theo khoảng thời gian | Must |
+| US-08-03 | Báo cáo sách quá hạn | Must |
+
+**Sprint 7 — Story Should và hoàn thiện NFR** (8 story Should)
+
+| Story | Tên | Ưu tiên |
+|---|---|---|
+| US-01-04 | Khôi phục mật khẩu | Should |
+| US-01-06 | Cập nhật thông tin tài khoản | Should |
+| US-01-09 | Xem và cập nhật thông tin cá nhân | Should |
+| US-01-10 | Cấu hình chính sách mượn trả | Should |
+| US-02-07 | Quản lý nhà xuất bản | Should |
+| US-05-04 | Xem danh sách và chi tiết phiếu mượn | Should |
+| US-06-06 | Theo dõi danh sách sách đang mượn quá hạn | Should |
+| US-08-04 | Thống kê độc giả | Should |
+
+Hoàn thiện NFR trong Sprint 7:
+
+- [ ] Kiểm thử tải với 200 người dùng đồng thời và dữ liệu ở quy mô dự kiến (NFR-01-05).
+- [ ] Quét bảo mật theo OWASP Top 10 (NFR-05-10).
+- [ ] Kiểm tra khả năng tiếp cận các màn hình độc giả (NFR-08).
+- [ ] Diễn tập khôi phục từ bản sao lưu (NFR-11-04).
+- [ ] Nghiệm thu MVP với thư viện: toàn bộ Must và các Should chưa được duyệt hoãn.
+
+**Story Could** — chỉ làm khi còn nguồn lực sau khi xong Must và Should: US-02-08 (ảnh bìa và mô tả), US-03-06 (kiểm kê theo đợt), US-08-05 (sách được mượn nhiều nhất).
+
+### 4.3. Phân bổ
+
+| | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 | Sprint 5 | Sprint 6 | Sprint 7 | Chưa xếp | Tổng |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Must | 8 | 9 | 6 | 7 | 6 | 5 | 0 | 0 | 41 |
+| Should | 0 | 0 | 0 | 0 | 1 | 1 | 8 | 0 | 10 |
+| Could | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 3 |
+
+## 5. Triển khai
+
+Các việc bắt buộc trước khi đưa vào sử dụng:
+
+- [ ] Cấu hình dịch vụ gửi email trên môi trường thật (CON-03).
 - [ ] Khởi tạo quản trị viên đầu tiên bằng công cụ vận hành (FR-01-14).
-- [ ] Quét bảo mật, không còn lỗ hổng mức Cao hoặc Nghiêm trọng (NFR-05-10).
-- [ ] Thiết lập sao lưu tự động và diễn tập khôi phục (NFR-11-01, NFR-11-04).
+- [ ] Không còn lỗ hổng bảo mật mức Cao hoặc Nghiêm trọng (NFR-05-10).
+- [ ] Thiết lập sao lưu tự động và hoàn thành diễn tập khôi phục (NFR-11-01, NFR-11-04).
 - [ ] Thiết lập theo dõi và cảnh báo (NFR-09-03 → NFR-09-05).
+- [ ] Chuyển dữ liệu cũ vào hệ thống, nếu OI-04 xác nhận là cần.
 
-## 5. Cách cập nhật tài liệu này
+## 6. Cách làm việc
 
-- Khi chuyển sang giai đoạn mới hoặc hoàn thành một hạng mục: cập nhật trạng thái ở mục 1, ngày "Cập nhật lần cuối" và "Giai đoạn hiện tại" ở đầu tài liệu.
+- **Lập kế hoạch sprint:** đầu mỗi sprint, chọn story từ lộ trình ở mục 4, kiểm tra phụ thuộc và ước lượng lại.
+- **Review sprint:** cuối mỗi sprint, demo cho thư viện; ghi nhận phản hồi và điều chỉnh backlog và tài liệu yêu cầu.
+- **Retrospective:** sau review, nhóm rút kinh nghiệm cho sprint sau.
+- **Thay đổi yêu cầu:** sau khi có baseline v1.0, mọi thay đổi yêu cầu được ghi vào tài liệu yêu cầu và nhật ký ở mục 8.
+
+## 7. Cách cập nhật tài liệu này
+
+- Khi bắt đầu hoặc kết thúc một sprint: cập nhật cột "Thời gian" và "Trạng thái" ở mục 4.1, ngày "Cập nhật lần cuối" và "Giai đoạn hiện tại" ở đầu tài liệu.
+- Khi chuyển story giữa các sprint: sửa bảng ở mục 4.2 và bảng phân bổ ở mục 4.3.
 - Khi tạo issue cho một hạng mục: điền số issue vào cột "Issue".
-- Mỗi lần cập nhật: thêm một dòng vào mục 6.
+- Mỗi lần cập nhật: thêm một dòng vào mục 8.
 
-## 6. Nhật ký cập nhật
+## 8. Nhật ký cập nhật
 
 | Ngày | Nội dung |
 |---|---|
 | 26/11/2026 | Tạo issue #1, bắt đầu giai đoạn Phân tích yêu cầu. Merge bộ tài liệu yêu cầu vào nhánh `develop` qua PR #2. |
 | 28/11/2026 | Hoàn thành bản nháp bộ tài liệu yêu cầu sau 4 vòng rà soát nội bộ; tạo tài liệu theo dõi tiến độ. |
+| 28/11/2026 | Chọn mô hình Agile (Scrum); thêm Sprint 0, Định nghĩa Hoàn thành và lộ trình Sprint 1 → Sprint 7. |
