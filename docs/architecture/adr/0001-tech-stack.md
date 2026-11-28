@@ -32,6 +32,7 @@
 | Backend | NestJS | **12.x** | API, xác thực, phân quyền, nghiệp vụ |
 | Cơ sở dữ liệu | PostgreSQL (mã hóa `UTF8`; extension `unaccent`, `pg_trgm`) | **18**, bản vá (minor) mới nhất khi cài đặt (18.7 tại ngày quyết định) | Lưu trữ dữ liệu nghiệp vụ |
 | Reverse proxy | nginx | Nhánh **stable** mới nhất | HTTPS; định tuyến cùng một tên miền: `/` → Next.js, `/api` → NestJS |
+| Gửi email | Dịch vụ gửi email giao dịch bên ngoài, gửi qua **SMTP**; không tự dựng mail server | Nhà cung cấp cụ thể chốt trong #21 | Gửi liên kết kích hoạt tài khoản và khôi phục mật khẩu (CON-03, BR-01-11, FR-01-04). Khi phát triển dùng Mailpit để hứng email, không gửi ra ngoài |
 | Quản lý gói | pnpm (workspace) | **12.x** | Quản lý monorepo `apps/web`, `apps/api`, `packages/shared` |
 | Môi trường phát triển | Docker, Docker Compose | Bản ổn định mới nhất | **Chỉ dùng trên máy phát triển:** chạy PostgreSQL, Mailpit (hứng email) và các dịch vụ phụ trợ bằng container |
 | Môi trường kiểm thử và môi trường thật | Cài trực tiếp trên VPS, **không dùng Docker** | Cùng phiên bản với bảng trên | Node.js, PostgreSQL và nginx chạy như dịch vụ của hệ điều hành; Next.js và NestJS chạy dưới trình quản lý tiến trình (systemd hoặc PM2, chốt trong #18) để tự khởi động lại |
@@ -54,7 +55,7 @@
 | Thư viện giao diện | #19 |
 | Công cụ kiểm thử | #20 |
 | CI và phiên bản TypeScript | #16 |
-| Dịch vụ email và tên miền | #21 |
+| Nhà cung cấp email cụ thể, tên miền, cấu hình SPF/DKIM/DMARC | #21 |
 | Hệ điều hành và cấu hình VPS; trình quản lý tiến trình; quy trình triển khai | #18 |
 
 ## Lý do
@@ -70,6 +71,7 @@
   - Kiểu `timestamptz` lưu thời điểm kèm múi giờ (NFR-10-04).
   - Chọn 18 thay vì 19: bản 19 mới phát hành ngày 19/11/2026 (19.0); bản 18 đã qua nhiều bản vá và được hỗ trợ đến năm 2030.
 - **nginx:** reverse proxy phổ biến, tài liệu đầy đủ; đặt cả frontend và API dưới cùng một tên miền nên cookie phiên đăng nhập hoạt động mà không cần cấu hình CORS.
+- **Email qua dịch vụ bên ngoài và SMTP:** email từ một VPS tự dựng mail server rất dễ bị đánh dấu là thư rác, trong khi liên kết kích hoạt phải đến được hộp thư của người dùng thì tài khoản mới dùng được (BR-01-11, BR-01-13). Gửi qua SMTP chuẩn nên đổi nhà cung cấp chỉ cần đổi cấu hình, không sửa mã; Mailpit cũng nhận SMTP nên môi trường phát triển dùng cùng cách gửi.
 - **VPS tự quản lý:** chi phí thấp, nhóm toàn quyền kiểm soát.
 - **Docker chỉ cho môi trường phát triển:** thành viên mới dựng được PostgreSQL và các dịch vụ phụ trợ bằng một lệnh, không phải cài từng thứ (NFR-06-05).
 - **Không dùng Docker khi chạy thật:** bớt một tầng trung gian và tài nguyên trên VPS; nhóm vận hành trực tiếp các dịch vụ quen thuộc (Node.js, PostgreSQL, nginx) và xem log, khởi động lại bằng công cụ của hệ điều hành.
@@ -87,6 +89,7 @@
 |---|---|
 | Hai ứng dụng riêng (Next.js và NestJS) tốn công thiết lập hơn một ứng dụng full-stack, trong khi thời gian chỉ khoảng 1 tháng | Monorepo pnpm và gói dùng chung; dựng khung một lần trong Sprint 0 (#16, #17) |
 | Hàm `unaccent` không được khai báo là bất biến (IMMUTABLE) nên không dùng trực tiếp trong biểu thức index | Tạo hàm bọc bất biến hoặc cột tìm kiếm đã chuẩn hóa (bỏ dấu, chữ thường) có index `pg_trgm`; kiểm chứng trong #14 |
+| Email kích hoạt bị vào thư rác hoặc dịch vụ email gặp sự cố, người dùng không kích hoạt được tài khoản | Cấu hình SPF, DKIM, DMARC cho tên miền (#21); gửi lại tự động khi lỗi (NFR-04-05); thủ thư và quản trị viên gửi lại liên kết được (FR-01-13) |
 | Nhóm cần làm quen vận hành PostgreSQL (cấu hình kết nối, quyền, sao lưu) | ORM che phần lớn khác biệt khi viết mã; ghi hướng dẫn cài đặt và sao lưu trong #18 |
 | TypeScript bản mới nhất có thể chưa tương thích hoàn toàn với decorator của NestJS | Chỉ dùng phiên bản TypeScript được NestJS và Next.js hỗ trợ chính thức; chốt và kiểm tra trong #16 |
 | Tự quản lý VPS: nhóm chịu trách nhiệm cập nhật bảo mật, sao lưu, theo dõi; một máy chủ duy nhất là điểm lỗi đơn | Sao lưu tự động và diễn tập khôi phục (NFR-11); theo dõi và cảnh báo (NFR-09); mục tiêu sẵn sàng 99,5% đã tính tới một máy chủ |
@@ -101,6 +104,7 @@
 | Chỉ dùng Next.js full-stack (API routes hoặc server actions) | Ít thành phần hơn, nhưng nhóm chọn NestJS để có backend tách biệt, cấu trúc rõ ràng cho nghiệp vụ mượn trả và phân quyền |
 | MySQL 9.7 LTS | Lựa chọn ban đầu, đổi sang PostgreSQL trước khi viết mã. Đáp ứng được giao dịch và toàn vẹn dữ liệu, nhưng không có partial index (ràng buộc BR-03-05 phải dùng cột phụ), DDL tự commit nên migration lỗi có thể để lại cơ sở dữ liệu dở dang, và collation không dấu chưa chắc coi "đ" là "d" |
 | PostgreSQL 19 | Mới phát hành 19/11/2026, mới có bản 19.0; chờ bản vá và hỗ trợ của ORM, extension. Nâng cấp sau bằng issue riêng theo chính sách phiên bản |
+| Tự dựng mail server trên VPS | Không tốn phí dịch vụ, nhưng email dễ vào thư rác do địa chỉ IP của VPS chưa có uy tín gửi thư, và nhóm phải tự vận hành thêm một dịch vụ phức tạp |
 | Caddy thay cho nginx | Tự cấp HTTPS đơn giản hơn; nhóm chọn nginx vì phổ biến và tài liệu đầy đủ. HTTPS dùng Let's Encrypt với nginx |
 | Dùng Docker cho cả môi trường thật | Môi trường giống hệt nhau giữa các nơi chạy; nhóm chọn cài trực tiếp để bớt tầng trung gian và tài nguyên trên VPS, và vận hành bằng công cụ quen thuộc |
 | Dịch vụ cloud quản lý sẵn (PaaS) | Giảm công vận hành nhưng chi phí cao hơn và phụ thuộc nhà cung cấp; nhóm chọn VPS tự quản lý |
