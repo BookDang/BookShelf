@@ -1,4 +1,4 @@
-# Tiến độ dự án — BookShelf
+# Tiến độ dự án — BookShelfundefined[#11](https://github.com/BookDang/BookShelf/issues/11), [#12](https://github.com/BookDang/BookShelf/issues/12) |undefined[#13](https://github.com/BookDang/BookShelf/issues/13) |undefined[#14](https://github.com/BookDang/BookShelf/issues/14) |undefined[#15](https://github.com/BookDang/BookShelf/issues/15) |undefined[#19](https://github.com/BookDang/BookShelf/issues/19) |undefined[#16](https://github.com/BookDang/BookShelf/issues/16) |undefined[#17](https://github.com/BookDang/BookShelf/issues/17), [#18](https://github.com/BookDang/BookShelf/issues/18) |undefined[#21](https://github.com/BookDang/BookShelf/issues/21) |undefined[#20](https://github.com/BookDang/BookShelf/issues/20) |
 
 > **Cập nhật lần cuối:** 28/11/2026  
 > **Mô hình phát triển:** Agile (Scrum). Sprint kết thúc khi hoàn thành mọi issue của sprint; mục tiêu mỗi sprint là 3 ngày  
@@ -76,15 +76,15 @@ Sprint 0 có thể bắt đầu song song với bước 1 và 2.
 
 | Hạng mục | Đầu vào chính | Trạng thái | Issue |
 |---|---|---|---|
-| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | 🟡 Đã chốt nginx, Next.js, NestJS, MySQL; còn chọn ORM và viết ADR | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Khung giao diện và quy ước UI | NFR-07, NFR-08 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Repo, CI chạy kiểm thử tự động, migration | NFR-06-03, NFR-06-04 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Môi trường phát triển và kiểm thử; dịch vụ email cho môi trường phát triển | NFR-06-05, NFR-06-06; CON-03 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Chốt dịch vụ gửi email và tên miền | CON-03; NFR-05-06 | ⬜ Chưa xác định | [#3](https://github.com/BookDang/BookShelf/issues/3) |
-| Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | 🟡 Đã chốt nginx, Next.js, NestJS, MySQL; còn chọn ORM và viết ADR | [#11](https://github.com/BookDang/BookShelf/issues/11), [#12](https://github.com/BookDang/BookShelf/issues/12) |
+| Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | [#13](https://github.com/BookDang/BookShelf/issues/13) |
+| Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | [#14](https://github.com/BookDang/BookShelf/issues/14) |
+| Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | [#15](https://github.com/BookDang/BookShelf/issues/15) |
+| Khung giao diện và quy ước UI | NFR-07, NFR-08 | ⬜ | [#19](https://github.com/BookDang/BookShelf/issues/19) |
+| Repo, CI chạy kiểm thử tự động, migration | NFR-06-03, NFR-06-04 | ⬜ | [#16](https://github.com/BookDang/BookShelf/issues/16) |
+| Môi trường phát triển và kiểm thử; dịch vụ email cho môi trường phát triển | NFR-06-05, NFR-06-06; CON-03 | ⬜ | [#17](https://github.com/BookDang/BookShelf/issues/17), [#18](https://github.com/BookDang/BookShelf/issues/18) |
+| Chốt dịch vụ gửi email và tên miền | CON-03; NFR-05-06 | ⬜ Chưa xác định | [#21](https://github.com/BookDang/BookShelf/issues/21) |
+| Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | ⬜ | [#20](https://github.com/BookDang/BookShelf/issues/20) |
 | Backlog trên GitHub: mỗi sprint một issue (nhãn `sprint`) chứa checklist story | [user-stories.md](requirements/user-stories.md) | ✅ | [#3](https://github.com/BookDang/BookShelf/issues/3) → [#10](https://github.com/BookDang/BookShelf/issues/10) |
 
 **Kết quả cuối Sprint 0:** một ứng dụng khung chạy được trên môi trường kiểm thử, CI tự động chạy kiểm thử cho mỗi thay đổi, và backlog Sprint 1 đã sẵn sàng.
@@ -262,5 +262,6 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 | 26/11/2026 | Tạo issue #1, bắt đầu giai đoạn Phân tích yêu cầu. Merge bộ tài liệu yêu cầu vào nhánh `develop` qua PR #2. |
 | 28/11/2026 | Hoàn thành bản nháp bộ tài liệu yêu cầu sau 4 vòng rà soát nội bộ; tạo tài liệu theo dõi tiến độ. |
 | 28/11/2026 | Chọn mô hình Agile (Scrum); thêm Sprint 0, Định nghĩa Hoàn thành và lộ trình Sprint 1 → Sprint 7. |
+| 28/11/2026 | Bắt đầu Sprint 0: tạo 11 issue công việc #11 → #21, là sub-issue của #3. |
 | 28/11/2026 | Tạo issue theo dõi cho từng sprint: #3 (Sprint 0) → #10 (Sprint 7). |
 | 28/11/2026 | Chốt công nghệ: nginx, Next.js, NestJS, MySQL. Đổi cách tính sprint: kết thúc khi xong mọi issue, mục tiêu 3 ngày mỗi sprint; thêm thời gian dự kiến cho từng sprint. |
