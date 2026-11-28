@@ -26,8 +26,8 @@ develop
 
 1. Chia issue công việc thành các sub-issue.
 2. Tạo **nhánh chính** của issue từ `develop` (từ `main` nếu là hotfix).
-3. Mỗi sub-issue: tạo nhánh từ nhánh chính, commit từng thay đổi riêng biệt, mở PR vào nhánh chính, review, merge, xóa nhánh sub-issue, **đóng tay sub-issue**.
-4. Khi mọi sub-issue đã merge vào nhánh chính: mở PR từ nhánh chính vào `develop` (hoặc `main` nếu là hotfix), review, **Squash and merge thành 1 commit duy nhất**, xóa nhánh chính, **đóng tay issue công việc**.
+3. Mỗi sub-issue: tạo nhánh từ nhánh chính, commit từng thay đổi riêng biệt, mở PR vào nhánh chính, kiểm tra, merge, xóa nhánh sub-issue, **đóng tay sub-issue**.
+4. Khi mọi sub-issue đã merge vào nhánh chính: mở PR từ nhánh chính vào `develop` (hoặc `main` nếu là hotfix), kiểm tra (nên nhờ thành viên còn lại review), **Squash and merge thành 1 commit duy nhất**, xóa nhánh chính, **đóng tay issue công việc**.
 
 ### 1.3. Issue không có sub-issue
 
@@ -168,7 +168,7 @@ Closes #33
 
 ## 6. Pull Request
 
-**Mọi PR đều phải được thành viên còn lại review và approve**, kể cả PR chỉ thay đổi tài liệu. Người mở PR không tự approve.
+**Mọi thay đổi đều đi qua PR, nhưng approve không bắt buộc:** người mở PR được tự merge khi đã đạt các điều kiện merge bên dưới. Nên nhờ thành viên còn lại review với PR nhánh chính của issue và các thay đổi có rủi ro (mượn trả, phân quyền, cơ sở dữ liệu).
 
 | | PR sub-issue | PR nhánh chính |
 |---|---|---|
@@ -179,7 +179,7 @@ Closes #33
 | Cách merge | Rebase and merge | **Squash and merge** — 1 commit, message theo mục 5.3 |
 | Sau khi merge | Xóa nhánh sub-issue; **đóng tay sub-issue** | Xóa nhánh chính; **đóng tay issue công việc** (và sub-issue nào còn mở); kiểm tra thẻ trên Project đã sang `Done` |
 
-**Điều kiện merge:** có approve; CI xanh; không còn trao đổi chưa giải quyết; nhánh đã cập nhật theo nhánh đích.
+**Điều kiện merge:** CI xanh; không còn trao đổi chưa giải quyết; nhánh đã cập nhật theo nhánh đích; người merge đã tự kiểm tra theo danh sách "Người review (hoặc người tự merge) kiểm tra" bên dưới.
 
 **Đóng issue bằng tay:** nhánh mặc định của repo là `main`, mà GitHub chỉ tự đóng issue theo từ khóa `Closes` khi thay đổi vào nhánh mặc định. Vì vậy **người merge PR chịu trách nhiệm đóng tay issue** ngay sau khi merge:
 
@@ -188,7 +188,7 @@ Closes #33
 - Khi đóng, ghi bình luận liên kết tới PR đã merge, ví dụ `Done in #50`.
 - PR hotfix merge vào `main` tự đóng issue theo `Closes`; kiểm tra lại sau khi merge.
 
-**Người review kiểm tra:**
+**Người review (hoặc người tự merge) kiểm tra:**
 
 - Thay đổi đáp ứng tiêu chí nghiệm thu của issue hoặc User Story.
 - Có kiểm thử cho các Business Rule liên quan.
@@ -208,7 +208,7 @@ Closes #33
 1. Tạo issue cho lỗi, gắn nhãn `bug`; chia sub-issue nếu cần.
 2. Tạo nhánh chính `hotfix/<số-issue>-<mô-tả>` từ `main`; các nhánh sub-issue `hotfix/<số-issue-cha>-<số-sub-issue>-<mô-tả>` tạo từ nhánh chính.
 3. Merge các sub-issue vào nhánh chính như luồng chuẩn.
-4. Mở PR nhánh chính vào `main`, review, **Squash and merge** thành 1 commit; gắn tag tăng số patch (ví dụ `v1.0.1`).
+4. Mở PR nhánh chính vào `main`, kiểm tra, **Squash and merge** thành 1 commit; gắn tag tăng số patch (ví dụ `v1.0.1`).
 5. Merge `main` vào `develop` để `develop` có bản sửa.
 
 ## 8. Xử lý bug bị mở lại
@@ -236,12 +236,17 @@ Closes #33
 
 Áp dụng cho `main` và `develop`:
 
-- Bắt buộc merge qua PR, có ít nhất 1 approve.
+- Bắt buộc merge qua PR; không bắt buộc approve.
 - Bắt buộc CI xanh (bật sau khi hoàn thành issue #16).
 - Bắt buộc giải quyết hết trao đổi trước khi merge.
 - Cấm force push và cấm xóa nhánh.
+- Quy định áp dụng cả với quản trị viên repo: không ai push thẳng lên `main` hoặc `develop`.
 
-Trong cài đặt repo, chỉ bật **Squash merging** và **Rebase merging** cho PR thường; giữ **Merge commits** cho PR phát hành `develop` → `main`.
+**Cài đặt merge của repo:**
+
+- Bật cả ba cách merge (Squash, Rebase, Merge commit) vì GitHub không giới hạn cách merge theo từng nhánh. Người merge chọn đúng cách theo bảng ở mục 2.
+- Squash merge: tiêu đề mặc định là tiêu đề PR, phần thân để trống để người merge điền theo mục 5.3.
+- Merge commit (PR phát hành): tiêu đề mặc định là tiêu đề PR.
 
 ## 10. Ví dụ đầy đủ
 
@@ -258,7 +263,7 @@ git commit -m "feat(auth): add session table migration" -m "Refs #31"
 git commit -m "feat(auth): add login and logout endpoints" -m "Refs #31"
 git push -u origin feat/30-31-login-api
 gh pr create --base feat/30-login --title "feat(auth): add login and logout endpoints" --body "Part of #30. Resolves #31."
-# → review, approve → Rebase and merge → xóa nhánh
+# → kiểm tra → Rebase and merge → xóa nhánh
 gh issue close 31 --comment "Done in #<số-PR>"
 
 # 3. Sub-issue #32: làm tương tự với nhánh feat/30-32-login-page
@@ -266,6 +271,6 @@ gh issue close 31 --comment "Done in #<số-PR>"
 # 4. Khi #31 và #32 đã merge: PR nhánh chính vào develop
 gh pr create --base develop --head feat/30-login --title "feat(auth): add staff login and logout" \
   --body "Closes #30, closes #31, closes #32"
-# → review, approve → Squash and merge (sửa message theo mục 5.3) → xóa nhánh chính
+# → kiểm tra (nên nhờ review) → Squash and merge (sửa message theo mục 5.3) → xóa nhánh chính
 gh issue close 30 --comment "Done in #<số-PR>"
 ```
