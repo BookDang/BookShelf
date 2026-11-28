@@ -3,6 +3,7 @@
 > **Cập nhật lần cuối:** 28/11/2026  
 > **Mô hình phát triển:** Agile (Scrum). Sprint kết thúc khi hoàn thành mọi issue của sprint; mục tiêu mỗi sprint là 3 ngày  
 > **Công nghệ:** nginx, Next.js, NestJS, MySQL (bản LTS); triển khai trên VPS tự dựng  
+> **Bảng công việc:** [GitHub Project "BookShelf MVP"](https://github.com/users/BookDang/projects/4)  
 > **Giai đoạn hiện tại:** 2. Phân tích yêu cầu — gần hoàn tất, chờ xác nhận và phê duyệt  
 > **Tiếp theo:** Sprint 0 — chuẩn bị nền tảng kỹ thuật
 
@@ -243,6 +244,7 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 ## 6. Cách làm việc
 
 - **Theo dõi sprint:** mỗi sprint có một issue trên GitHub (nhãn `sprint`) chứa checklist story; đánh dấu từng mục khi story đạt Định nghĩa Hoàn thành. Đóng issue khi hết checklist, tức là kết thúc sprint.
+- **Theo dõi công việc hằng ngày:** dùng [GitHub Project "BookShelf MVP"](https://github.com/users/BookDang/projects/4). Khi bắt đầu một việc, chuyển thẻ sang `In Progress` và gán người làm. Khi bắt đầu mỗi sprint, tách các story thành sub-issue của issue sprint và gán trường Sprint, để mỗi thẻ là một việc cụ thể.
 - **Lập kế hoạch sprint:** đầu mỗi sprint, chọn story từ lộ trình ở mục 4, kiểm tra phụ thuộc và ước lượng lại.
 - **Review sprint:** cuối mỗi sprint, demo cho thư viện; ghi nhận phản hồi và điều chỉnh backlog và tài liệu yêu cầu.
 - **Retrospective:** sau review, nhóm rút kinh nghiệm cho sprint sau.
@@ -262,6 +264,7 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 | 26/11/2026 | Tạo issue #1, bắt đầu giai đoạn Phân tích yêu cầu. Merge bộ tài liệu yêu cầu vào nhánh `develop` qua PR #2. |
 | 28/11/2026 | Hoàn thành bản nháp bộ tài liệu yêu cầu sau 4 vòng rà soát nội bộ; tạo tài liệu theo dõi tiến độ. |
 | 28/11/2026 | Chọn mô hình Agile (Scrum); thêm Sprint 0, Định nghĩa Hoàn thành và lộ trình Sprint 1 → Sprint 7. |
+| 28/11/2026 | Tạo GitHub Project "BookShelf MVP" (trường Status, Sprint); thêm issue #1, #3 → #21. |
 | 28/11/2026 | Bắt đầu Sprint 0: tạo 11 issue công việc #11 → #21, là sub-issue của #3. |
 | 28/11/2026 | Tạo issue theo dõi cho từng sprint: #3 (Sprint 0) → #10 (Sprint 7). |
 | 28/11/2026 | Chốt công nghệ: nginx, Next.js, NestJS, MySQL. Đổi cách tính sprint: kết thúc khi xong mọi issue, mục tiêu 3 ngày mỗi sprint; thêm thời gian dự kiến cho từng sprint. |
