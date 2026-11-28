@@ -10,3 +10,4 @@ Hệ thống quản lý thư viện trên nền tảng web: quản lý danh mụ
   - [Yêu cầu chức năng](docs/requirements/functional-requirements.md)
   - [Yêu cầu phi chức năng](docs/requirements/non-functional-requirements.md)
   - [Quy tắc nghiệp vụ](docs/requirements/business-rules.md)
+- [Quy trình làm việc với Git](CONTRIBUTING.md) — đặt tên nhánh, quy tắc commit, Pull Request và review.
