@@ -1,7 +1,8 @@
 # Tiến độ dự án — BookShelf
 
 > **Cập nhật lần cuối:** 28/11/2026  
-> **Mô hình phát triển:** Agile (Scrum), sprint 2 tuần  
+> **Mô hình phát triển:** Agile (Scrum). Sprint kết thúc khi hoàn thành mọi issue của sprint; mục tiêu mỗi sprint là 3 ngày  
+> **Công nghệ:** nginx, Next.js, NestJS, MySQL (bản LTS); triển khai trên VPS tự dựng  
 > **Giai đoạn hiện tại:** 2. Phân tích yêu cầu — gần hoàn tất, chờ xác nhận và phê duyệt  
 > **Tiếp theo:** Sprint 0 — chuẩn bị nền tảng kỹ thuật
 
@@ -17,8 +18,8 @@ Dự án theo mô hình Agile: sau khi chốt yêu cầu ban đầu, các giai �
 |---|---|---|---|---|
 | 1 | Lập kế hoạch (Planning) | 🟠 Làm một phần | Mục tiêu, phạm vi MVP và phần ngoài phạm vi trong issue #1; lộ trình sprint tại mục 4. Chưa có ước lượng nguồn lực và thời gian cụ thể. | — |
 | 2 | **Phân tích yêu cầu (Requirements)** | 🟡 **Đang thực hiện** | Bộ tài liệu yêu cầu ban đầu tại [docs/requirements/](requirements/). Được tinh chỉnh tiếp qua phản hồi sau mỗi sprint. | [#1](https://github.com/BookDang/BookShelf/issues/1) |
-| 3 | Thiết kế (Design) | ⬜ Chưa bắt đầu | Phần nền tảng (kiến trúc, công nghệ, khung dữ liệu) ở Sprint 0; thiết kế chi tiết của từng tính năng trong sprint thực hiện tính năng đó. | Chưa tạo |
-| 4 | Phát triển (Implementation) | ⬜ Chưa bắt đầu | Sprint 1 → Sprint 7 (mục 4). | Chưa tạo |
+| 3 | Thiết kế (Design) | ⬜ Chưa bắt đầu | Phần nền tảng (kiến trúc, công nghệ, khung dữ liệu) ở Sprint 0; thiết kế chi tiết của từng tính năng trong sprint thực hiện tính năng đó. | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| 4 | Phát triển (Implementation) | ⬜ Chưa bắt đầu | Sprint 1 → Sprint 7 (mục 4). | [#4](https://github.com/BookDang/BookShelf/issues/4) → [#10](https://github.com/BookDang/BookShelf/issues/10) |
 | 5 | Kiểm thử (Testing) | ⬜ Chưa bắt đầu | Kiểm thử trong từng sprint theo Định nghĩa Hoàn thành (mục 3.2); kiểm thử tải, bảo mật và nghiệm thu MVP ở Sprint 7. | Chưa tạo |
 | 6 | Triển khai (Deployment) | ⬜ Chưa bắt đầu | Sau khi nghiệm thu MVP (mục 5). | Chưa tạo |
 | 7 | Vận hành, bảo trì (Maintenance) | ⬜ Chưa bắt đầu | Theo dõi, sao lưu, xử lý sự cố. | — |
@@ -75,15 +76,16 @@ Sprint 0 có thể bắt đầu song song với bước 1 và 2.
 
 | Hạng mục | Đầu vào chính | Trạng thái | Issue |
 |---|---|---|---|
-| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | ⬜ | Chưa tạo |
-| Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | Chưa tạo |
-| Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | Chưa tạo |
-| Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | Chưa tạo |
-| Khung giao diện và quy ước UI | NFR-07, NFR-08 | ⬜ | Chưa tạo |
-| Repo, CI chạy kiểm thử tự động, migration | NFR-06-03, NFR-06-04 | ⬜ | Chưa tạo |
-| Môi trường phát triển và kiểm thử; dịch vụ email cho môi trường phát triển | NFR-06-05, NFR-06-06; CON-03 | ⬜ | Chưa tạo |
-| Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | ⬜ | Chưa tạo |
-| Backlog trên GitHub: mỗi User Story là một issue, gắn nhãn epic và mức ưu tiên | [user-stories.md](requirements/user-stories.md) | ⬜ | Chưa tạo |
+| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | 🟡 Đã chốt nginx, Next.js, NestJS, MySQL; còn chọn ORM và viết ADR | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Khung giao diện và quy ước UI | NFR-07, NFR-08 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Repo, CI chạy kiểm thử tự động, migration | NFR-06-03, NFR-06-04 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Môi trường phát triển và kiểm thử; dịch vụ email cho môi trường phát triển | NFR-06-05, NFR-06-06; CON-03 | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Chốt dịch vụ gửi email và tên miền | CON-03; NFR-05-06 | ⬜ Chưa xác định | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| Backlog trên GitHub: mỗi sprint một issue (nhãn `sprint`) chứa checklist story | [user-stories.md](requirements/user-stories.md) | ✅ | [#3](https://github.com/BookDang/BookShelf/issues/3) → [#10](https://github.com/BookDang/BookShelf/issues/10) |
 
 **Kết quả cuối Sprint 0:** một ứng dụng khung chạy được trên môi trường kiểm thử, CI tự động chạy kiểm thử cho mỗi thay đổi, và backlog Sprint 1 đã sẵn sàng.
 
@@ -100,20 +102,24 @@ Một User Story chỉ được coi là hoàn thành khi:
 
 ## 4. Lộ trình sprint
 
+**Độ dài sprint:** nhóm 2 người làm ngoài giờ nên sprint không cố định theo thời gian. Một sprint kết thúc khi mọi issue của sprint đã hoàn thành. Mục tiêu mỗi sprint là 3 ngày; sprint vượt quá 3 ngày cần được nhắc và xem lại phạm vi. Với 8 sprint, tổng thời gian mục tiêu khoảng 24 ngày.
+
 Lộ trình là dự kiến, được điều chỉnh sau mỗi buổi review sprint với thư viện. Thứ tự dựa trên mức ưu tiên và phụ thuộc giữa các chức năng (mục 5 của [functional-requirements.md](requirements/functional-requirements.md)): làm toàn bộ story Must trước để sớm có luồng nghiệp vụ chính chạy được, sau đó mới làm story Should.
 
 ### 4.1. Tổng quan
 
-| Sprint | Mục tiêu | Kết quả demo | Thời gian | Trạng thái |
-|---|---|---|---|---|
-| 0 | Nền tảng kỹ thuật (mục 3) | Ứng dụng khung chạy trên môi trường kiểm thử | — | ⬜ |
-| 1 | Tài khoản và phân quyền | Quản trị viên được khởi tạo, tạo được tài khoản thủ thư; thủ thư kích hoạt và đăng nhập | — | ⬜ |
-| 2 | Danh mục và kho sách | Thủ thư nhập đầu sách, tác giả, thể loại và bản sách vào kho | — | ⬜ |
-| 3 | Độc giả | Thủ thư đăng ký độc giả; độc giả kích hoạt tài khoản | — | ⬜ |
-| 4 | Mượn và trả sách | **Mốc M1:** luồng mượn trả chạy được từ đầu đến cuối | — | ⬜ |
-| 5 | Xử lý ngoại lệ mượn trả và màn hình độc giả | Hủy và chuyển phiếu, sách mất và hư hỏng; độc giả xem sách đang mượn và lịch sử | — | ⬜ |
-| 6 | Tra cứu và báo cáo | **Mốc M2:** hoàn thành toàn bộ story Must | — | ⬜ |
-| 7 | Story Should và hoàn thiện NFR | **Mốc M3:** bản ứng viên phát hành, nghiệm thu MVP | — | ⬜ |
+| Sprint | Mục tiêu | Kết quả demo | Thời gian dự kiến | Thời gian thực tế | Trạng thái | Issue |
+|---|---|---|---|---|---|---|
+| 0 | Nền tảng kỹ thuật (mục 3) | Ứng dụng khung chạy trên môi trường kiểm thử | 28/11 – 30/11/2026 | — | ⬜ | [#3](https://github.com/BookDang/BookShelf/issues/3) |
+| 1 | Tài khoản và phân quyền | Quản trị viên được khởi tạo, tạo được tài khoản thủ thư; thủ thư kích hoạt và đăng nhập | 01/12 – 03/12/2026 | — | ⬜ | [#4](https://github.com/BookDang/BookShelf/issues/4) |
+| 2 | Danh mục và kho sách | Thủ thư nhập đầu sách, tác giả, thể loại và bản sách vào kho | 04/12 – 06/12/2026 | — | ⬜ | [#5](https://github.com/BookDang/BookShelf/issues/5) |
+| 3 | Độc giả | Thủ thư đăng ký độc giả; độc giả kích hoạt tài khoản | 07/12 – 09/12/2026 | — | ⬜ | [#6](https://github.com/BookDang/BookShelf/issues/6) |
+| 4 | Mượn và trả sách | **Mốc M1:** luồng mượn trả chạy được từ đầu đến cuối | 10/12 – 12/12/2026 | — | ⬜ | [#7](https://github.com/BookDang/BookShelf/issues/7) |
+| 5 | Xử lý ngoại lệ mượn trả và màn hình độc giả | Hủy và chuyển phiếu, sách mất và hư hỏng; độc giả xem sách đang mượn và lịch sử | 13/12 – 15/12/2026 | — | ⬜ | [#8](https://github.com/BookDang/BookShelf/issues/8) |
+| 6 | Tra cứu và báo cáo | **Mốc M2:** hoàn thành toàn bộ story Must | 16/12 – 18/12/2026 | — | ⬜ | [#9](https://github.com/BookDang/BookShelf/issues/9) |
+| 7 | Story Should và hoàn thiện NFR | **Mốc M3:** bản ứng viên phát hành, nghiệm thu MVP | 19/12 – 21/12/2026 | — | ⬜ | [#10](https://github.com/BookDang/BookShelf/issues/10) |
+
+Thời gian dự kiến tính theo mục tiêu 3 ngày mỗi sprint, bắt đầu từ 28/11/2026. Khi một sprint xong sớm hoặc muộn, cập nhật cột "Thời gian thực tế" và lùi hoặc kéo các mốc phía sau tương ứng.
 
 ### 4.2. Story theo sprint
 
@@ -236,6 +242,7 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 
 ## 6. Cách làm việc
 
+- **Theo dõi sprint:** mỗi sprint có một issue trên GitHub (nhãn `sprint`) chứa checklist story; đánh dấu từng mục khi story đạt Định nghĩa Hoàn thành. Đóng issue khi hết checklist, tức là kết thúc sprint.
 - **Lập kế hoạch sprint:** đầu mỗi sprint, chọn story từ lộ trình ở mục 4, kiểm tra phụ thuộc và ước lượng lại.
 - **Review sprint:** cuối mỗi sprint, demo cho thư viện; ghi nhận phản hồi và điều chỉnh backlog và tài liệu yêu cầu.
 - **Retrospective:** sau review, nhóm rút kinh nghiệm cho sprint sau.
@@ -243,7 +250,7 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 
 ## 7. Cách cập nhật tài liệu này
 
-- Khi bắt đầu hoặc kết thúc một sprint: cập nhật cột "Thời gian" và "Trạng thái" ở mục 4.1, ngày "Cập nhật lần cuối" và "Giai đoạn hiện tại" ở đầu tài liệu.
+- Khi bắt đầu hoặc kết thúc một sprint: cập nhật cột "Thời gian thực tế" và "Trạng thái" ở mục 4.1, ngày "Cập nhật lần cuối" và "Giai đoạn hiện tại" ở đầu tài liệu.
 - Khi chuyển story giữa các sprint: sửa bảng ở mục 4.2 và bảng phân bổ ở mục 4.3.
 - Khi tạo issue cho một hạng mục: điền số issue vào cột "Issue".
 - Mỗi lần cập nhật: thêm một dòng vào mục 8.
@@ -255,3 +262,5 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 | 26/11/2026 | Tạo issue #1, bắt đầu giai đoạn Phân tích yêu cầu. Merge bộ tài liệu yêu cầu vào nhánh `develop` qua PR #2. |
 | 28/11/2026 | Hoàn thành bản nháp bộ tài liệu yêu cầu sau 4 vòng rà soát nội bộ; tạo tài liệu theo dõi tiến độ. |
 | 28/11/2026 | Chọn mô hình Agile (Scrum); thêm Sprint 0, Định nghĩa Hoàn thành và lộ trình Sprint 1 → Sprint 7. |
+| 28/11/2026 | Tạo issue theo dõi cho từng sprint: #3 (Sprint 0) → #10 (Sprint 7). |
+| 28/11/2026 | Chốt công nghệ: nginx, Next.js, NestJS, MySQL. Đổi cách tính sprint: kết thúc khi xong mọi issue, mục tiêu 3 ngày mỗi sprint; thêm thời gian dự kiến cho từng sprint. |
