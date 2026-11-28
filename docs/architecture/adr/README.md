@@ -7,6 +7,7 @@ ADR (Architecture Decision Record) ghi lại một quyết định kỹ thuật 
 | Số | Tiêu đề | Trạng thái | Ngày | Issue |
 |---|---|---|---|---|
 | [0001](0001-tech-stack.md) | Bộ công nghệ cho MVP | Đã chấp nhận | 28/11/2026 | #11 |
+| [0002](0002-orm.md) | ORM và công cụ migration | Đã chấp nhận | 28/11/2026 | #12 |
 
 ## Khi nào cần viết ADR
 

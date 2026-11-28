@@ -77,7 +77,7 @@ Sprint 0 có thể bắt đầu song song với bước 1 và 2.
 
 | Hạng mục | Đầu vào chính | Trạng thái | Issue |
 |---|---|---|---|
-| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | 🟡 ADR-0001 chốt nginx, Next.js, NestJS, PostgreSQL 18; còn chọn ORM (ADR-0002) | [#11](https://github.com/BookDang/BookShelf/issues/11), [#12](https://github.com/BookDang/BookShelf/issues/12) |
+| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | ✅ ADR-0001 (nginx, Next.js, NestJS, PostgreSQL 18), ADR-0002 (TypeORM 1.x) | [#11](https://github.com/BookDang/BookShelf/issues/11), [#12](https://github.com/BookDang/BookShelf/issues/12) |
 | Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | [#13](https://github.com/BookDang/BookShelf/issues/13) |
 | Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | [#14](https://github.com/BookDang/BookShelf/issues/14) |
 | Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | [#15](https://github.com/BookDang/BookShelf/issues/15) |
@@ -267,5 +267,6 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 | 28/11/2026 | Tạo GitHub Project "BookShelf MVP" (trường Status, Sprint); thêm issue #1, #3 → #21. |
 | 28/11/2026 | Bắt đầu Sprint 0: tạo 11 issue công việc #11 → #21, là sub-issue của #3. |
 | 28/11/2026 | Tạo issue theo dõi cho từng sprint: #3 (Sprint 0) → #10 (Sprint 7). |
+| 28/11/2026 | ADR-0002: chọn TypeORM 1.x làm ORM; thử nghiệm khóa dòng, partial unique index, migration quay lui và `unaccent` trên PostgreSQL 18 đều đạt. |
 | 28/11/2026 | ADR-0001: đổi cơ sở dữ liệu từ MySQL sang PostgreSQL 18; Docker chỉ dùng khi phát triển; email gửi qua dịch vụ SMTP bên ngoài. |
 | 28/11/2026 | Chốt công nghệ: nginx, Next.js, NestJS, MySQL. Đổi cách tính sprint: kết thúc khi xong mọi issue, mục tiêu 3 ngày mỗi sprint; thêm thời gian dự kiến cho từng sprint. |
