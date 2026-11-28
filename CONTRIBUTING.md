@@ -141,7 +141,7 @@ Refs #<số-issue>
 Khi Squash and merge nhánh chính, người merge sửa message của commit gộp theo mẫu:
 
 ```
-feat(auth): add staff login and logout
+feat(auth)(#30): add staff login and logout
 
 Staff sign in with email and password; sessions expire after 30
 minutes of inactivity and are revoked on logout.
@@ -150,15 +150,26 @@ minutes of inactivity and are revoked on logout.
 - Login page with field-level errors (#32)
 - Lockout after 5 failed attempts (#33)
 
+PR: #34
 Closes #30
 Closes #31
 Closes #32
 Closes #33
 ```
 
-- Tiêu đề: tiêu đề của PR nhánh chính, theo định dạng commit.
-- Thân: tóm tắt vì sao thay đổi và danh sách sub-issue. Xóa danh sách commit mà GitHub tự điền.
-- Chân: `Closes #` cho issue công việc và từng sub-issue. Các dòng này để truy vết; issue vẫn được đóng tay theo mục 6.
+- **Tiêu đề:** `<loại>(<phạm vi>)(#<số-issue>): <mô tả>` — số của issue công việc đặt ngay sau loại và phạm vi. Khi không có phạm vi: `<loại>(#<số-issue>): <mô tả>`. Tiêu đề lấy từ tiêu đề PR nhánh chính.
+- Dùng **số issue, không dùng số PR** trong tiêu đề, vì issue là đơn vị theo dõi trên Project. Khi squash, GitHub tự thêm ` (#<số-PR>)` vào cuối tiêu đề — **xóa phần này**.
+- **Thân:** tóm tắt vì sao thay đổi và danh sách sub-issue. Xóa danh sách commit mà GitHub tự điền.
+- **Chân:** `PR: #<số-PR>` để tra ngược PR; `Closes #` cho issue công việc và từng sub-issue. Các dòng `Closes` để truy vết; issue vẫn được đóng tay theo mục 6.
+
+Nhờ quy tắc này, `git log --oneline develop` đọc được như danh sách issue đã hoàn thành:
+
+```
+a1b2c3d feat(auth)(#30): add staff login and logout
+d4e5f6a docs(architecture)(#11): add ADR-0001 tech stack
+```
+
+Định dạng `(#<số-issue>)` sau phạm vi là quy ước riêng của dự án, không thuộc chuẩn Conventional Commits. Khi cấu hình công cụ kiểm tra commit (ví dụ commitlint trong #16), cần khai báo lại mẫu tiêu đề cho commit trên `develop` và `main`.
 
 ### 5.4. Nguyên tắc chung
 
@@ -173,7 +184,7 @@ Closes #33
 | | PR sub-issue | PR nhánh chính |
 |---|---|---|
 | Từ → vào | Nhánh sub-issue → nhánh chính | Nhánh chính → `develop` (hotfix: `main`) |
-| Tiêu đề | Định dạng commit, tiếng Anh | Định dạng commit, tiếng Anh; dùng làm tiêu đề commit gộp |
+| Tiêu đề | Định dạng commit, tiếng Anh | `<loại>(<phạm vi>)(#<số-issue>): <mô tả>`, tiếng Anh; dùng làm tiêu đề commit gộp (mục 5.3) |
 | Nội dung | `Part of #<issue-cha>`, `Resolves #<sub-issue>`; tóm tắt; cách kiểm tra | `Closes #` cho issue công việc và mọi sub-issue; tóm tắt; checklist [Định nghĩa Hoàn thành](docs/project-status.md#32-định-nghĩa-hoàn-thành-definition-of-done) |
 | Review tập trung vào | Chi tiết mã, kiểm thử, từng commit | Tổng thể: tiêu chí nghiệm thu của issue đạt đủ, các phần ghép với nhau đúng, CI xanh |
 | Cách merge | Rebase and merge | **Squash and merge** — 1 commit, message theo mục 5.3 |
@@ -245,7 +256,7 @@ Closes #33
 **Cài đặt merge của repo:**
 
 - Bật cả ba cách merge (Squash, Rebase, Merge commit) vì GitHub không giới hạn cách merge theo từng nhánh. Người merge chọn đúng cách theo bảng ở mục 2.
-- Squash merge: tiêu đề mặc định là tiêu đề PR, phần thân để trống để người merge điền theo mục 5.3.
+- Squash merge: tiêu đề mặc định là tiêu đề PR (GitHub thêm ` (#<số-PR>)` ở cuối, người merge xóa đi), phần thân để trống để người merge điền theo mục 5.3.
 - Merge commit (PR phát hành): tiêu đề mặc định là tiêu đề PR.
 
 ## 10. Ví dụ đầy đủ
@@ -269,7 +280,7 @@ gh issue close 31 --comment "Done in #<số-PR>"
 # 3. Sub-issue #32: làm tương tự với nhánh feat/30-32-login-page
 
 # 4. Khi #31 và #32 đã merge: PR nhánh chính vào develop
-gh pr create --base develop --head feat/30-login --title "feat(auth): add staff login and logout" \
+gh pr create --base develop --head feat/30-login --title "feat(auth)(#30): add staff login and logout" \
   --body "Closes #30, closes #31, closes #32"
 # → kiểm tra (nên nhờ review) → Squash and merge (sửa message theo mục 5.3) → xóa nhánh chính
 gh issue close 30 --comment "Done in #<số-PR>"
