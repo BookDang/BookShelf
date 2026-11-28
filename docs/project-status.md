@@ -2,7 +2,7 @@
 
 > **Cập nhật lần cuối:** 28/11/2026  
 > **Mô hình phát triển:** Agile (Scrum). Sprint kết thúc khi hoàn thành mọi issue của sprint; mục tiêu mỗi sprint là 3 ngày  
-> **Công nghệ:** nginx, Next.js, NestJS, MySQL (bản LTS); triển khai trên VPS tự dựng  
+> **Công nghệ:** nginx, Next.js, NestJS, PostgreSQL 18; email qua dịch vụ SMTP bên ngoài; triển khai trên VPS tự dựng (Docker chỉ dùng khi phát triển) — xem [ADR-0001](architecture/adr/0001-tech-stack.md)  
 > **Bảng công việc:** [GitHub Project "BookShelf MVP"](https://github.com/users/BookDang/projects/4)  
 > **Giai đoạn hiện tại:** 2. Phân tích yêu cầu — gần hoàn tất, chờ xác nhận và phê duyệt  
 > **Tiếp theo:** Sprint 0 — chuẩn bị nền tảng kỹ thuật
@@ -77,14 +77,14 @@ Sprint 0 có thể bắt đầu song song với bước 1 và 2.
 
 | Hạng mục | Đầu vào chính | Trạng thái | Issue |
 |---|---|---|---|
-| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | 🟡 Đã chốt nginx, Next.js, NestJS, MySQL; còn chọn ORM và viết ADR | [#11](https://github.com/BookDang/BookShelf/issues/11), [#12](https://github.com/BookDang/BookShelf/issues/12) |
+| Lựa chọn công nghệ | NFR-05, NFR-06; ràng buộc CON-01 → CON-05 | 🟡 ADR-0001 chốt nginx, Next.js, NestJS, PostgreSQL 18; còn chọn ORM (ADR-0002) | [#11](https://github.com/BookDang/BookShelf/issues/11), [#12](https://github.com/BookDang/BookShelf/issues/12) |
 | Kiến trúc hệ thống | NFR-01 → NFR-04, NFR-09, NFR-11 | ⬜ | [#13](https://github.com/BookDang/BookShelf/issues/13) |
 | Khung cơ sở dữ liệu ban đầu | Mục 2 của Business Rules (thuật ngữ, trạng thái); NFR-10 | ⬜ | [#14](https://github.com/BookDang/BookShelf/issues/14) |
 | Quy ước API và xử lý lỗi | Mục 4.1 của FR (quy định chung GEN-01 → GEN-10) | ⬜ | [#15](https://github.com/BookDang/BookShelf/issues/15) |
 | Khung giao diện và quy ước UI | NFR-07, NFR-08 | ⬜ | [#19](https://github.com/BookDang/BookShelf/issues/19) |
 | Repo, CI chạy kiểm thử tự động, migration | NFR-06-03, NFR-06-04 | ⬜ | [#16](https://github.com/BookDang/BookShelf/issues/16) |
 | Môi trường phát triển và kiểm thử; dịch vụ email cho môi trường phát triển | NFR-06-05, NFR-06-06; CON-03 | ⬜ | [#17](https://github.com/BookDang/BookShelf/issues/17), [#18](https://github.com/BookDang/BookShelf/issues/18) |
-| Chốt dịch vụ gửi email và tên miền | CON-03; NFR-05-06 | ⬜ Chưa xác định | [#21](https://github.com/BookDang/BookShelf/issues/21) |
+| Chốt dịch vụ gửi email và tên miền | CON-03; NFR-05-06 | 🟡 ADR-0001 chốt cách gửi (SMTP qua dịch vụ bên ngoài); còn chọn nhà cung cấp và tên miền | [#21](https://github.com/BookDang/BookShelf/issues/21) |
 | Kế hoạch kiểm thử | Tiêu chí nghiệm thu của User Stories; cột "Cách kiểm chứng" của NFR | ⬜ | [#20](https://github.com/BookDang/BookShelf/issues/20) |
 | Backlog trên GitHub: mỗi sprint một issue (nhãn `sprint`) chứa checklist story | [user-stories.md](requirements/user-stories.md) | ✅ | [#3](https://github.com/BookDang/BookShelf/issues/3) → [#10](https://github.com/BookDang/BookShelf/issues/10) |
 
@@ -267,4 +267,5 @@ Các việc bắt buộc trước khi đưa vào sử dụng:
 | 28/11/2026 | Tạo GitHub Project "BookShelf MVP" (trường Status, Sprint); thêm issue #1, #3 → #21. |
 | 28/11/2026 | Bắt đầu Sprint 0: tạo 11 issue công việc #11 → #21, là sub-issue của #3. |
 | 28/11/2026 | Tạo issue theo dõi cho từng sprint: #3 (Sprint 0) → #10 (Sprint 7). |
+| 28/11/2026 | ADR-0001: đổi cơ sở dữ liệu từ MySQL sang PostgreSQL 18; Docker chỉ dùng khi phát triển; email gửi qua dịch vụ SMTP bên ngoài. |
 | 28/11/2026 | Chốt công nghệ: nginx, Next.js, NestJS, MySQL. Đổi cách tính sprint: kết thúc khi xong mọi issue, mục tiêu 3 ngày mỗi sprint; thêm thời gian dự kiến cho từng sprint. |
