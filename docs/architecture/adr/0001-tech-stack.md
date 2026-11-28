@@ -19,7 +19,8 @@
 | NFR-05-06 | HTTPS với TLS 1.2 trở lên | Reverse proxy có TLS |
 | NFR-05-07 | Kiểm tra quyền ở phía máy chủ cho mọi yêu cầu | Backend có cơ chế phân quyền dùng chung |
 | NFR-01-05, NFR-03-01 | 200 người dùng đồng thời; sẵn sàng 99,5% | Một máy chủ đủ đáp ứng; không cần kiến trúc phân tán |
-| NFR-06-05 | Lập trình viên mới chạy được hệ thống trong 30 phút | Môi trường đóng gói, tái tạo được |
+| NFR-06-05 | Lập trình viên mới chạy được hệ thống trong 30 phút | Môi trường phát triển đóng gói, tái tạo được |
+| NFR-03-02 | Khôi phục hoạt động sau sự cố | Ứng dụng tự khởi động lại khi lỗi hoặc khi máy chủ khởi động lại |
 
 ## Quyết định
 
@@ -32,12 +33,14 @@
 | Cơ sở dữ liệu | MySQL (InnoDB, `utf8mb4`) | **9.7 LTS**, bản vá mới nhất khi cài đặt (9.7.4 tại ngày quyết định) | Lưu trữ dữ liệu nghiệp vụ |
 | Reverse proxy | nginx | Nhánh **stable** mới nhất | HTTPS; định tuyến cùng một tên miền: `/` → Next.js, `/api` → NestJS |
 | Quản lý gói | pnpm (workspace) | **12.x** | Quản lý monorepo `apps/web`, `apps/api`, `packages/shared` |
-| Đóng gói và chạy | Docker, Docker Compose | Bản ổn định mới nhất | Môi trường local và VPS giống nhau |
+| Môi trường phát triển | Docker, Docker Compose | Bản ổn định mới nhất | **Chỉ dùng trên máy phát triển:** chạy MySQL, Mailpit (hứng email) và các dịch vụ phụ trợ bằng container |
+| Môi trường kiểm thử và môi trường thật | Cài trực tiếp trên VPS, **không dùng Docker** | Cùng phiên bản với bảng trên | Node.js, MySQL và nginx chạy như dịch vụ của hệ điều hành; Next.js và NestJS chạy dưới trình quản lý tiến trình (systemd hoặc PM2, chốt trong #18) để tự khởi động lại |
 | Hạ tầng | VPS tự quản lý | — | Môi trường kiểm thử và môi trường thật |
 
 **Chính sách phiên bản:**
 
-- Ghi cố định phiên bản chính (major) trong `package.json` và image Docker; cho phép cập nhật bản vá (patch) và bản nhỏ (minor) sau khi CI chạy qua.
+- Ghi cố định phiên bản chính (major) trong `package.json`; cho phép cập nhật bản vá (patch) và bản nhỏ (minor) sau khi CI chạy qua.
+- Image Docker ở môi trường phát triển (MySQL, Node.js) phải cùng dòng phiên bản với bản cài trên VPS, để tránh lệch hành vi giữa máy phát triển và môi trường thật.
 - Node.js và MySQL luôn dùng dòng **LTS**. Không dùng dòng MySQL Innovation (26.x) cho môi trường thật vì mỗi bản chỉ được hỗ trợ đến khi có bản kế tiếp.
 - Nâng phiên bản chính của bất kỳ thành phần nào phải có issue riêng; nếu ảnh hưởng tới kiến trúc thì viết ADR mới.
 
@@ -51,7 +54,7 @@
 | Công cụ kiểm thử | #20 |
 | CI và phiên bản TypeScript | #16 |
 | Dịch vụ email và tên miền | #21 |
-| Hệ điều hành và cấu hình VPS | #18 |
+| Hệ điều hành và cấu hình VPS; trình quản lý tiến trình; quy trình triển khai | #18 |
 
 ## Lý do
 
@@ -64,7 +67,9 @@
   - Collation `utf8mb4_0900_ai_ci` không phân biệt hoa thường và dấu, là điểm khởi đầu cho tìm kiếm tiếng Việt (cần kiểm chứng, xem mục Hệ quả).
   - 9.7 là dòng LTS mới nhất, có thời gian hỗ trợ dài.
 - **nginx:** reverse proxy phổ biến, tài liệu đầy đủ; đặt cả frontend và API dưới cùng một tên miền nên cookie phiên đăng nhập hoạt động mà không cần cấu hình CORS.
-- **VPS và Docker Compose:** chi phí thấp, nhóm toàn quyền kiểm soát; cùng một tệp Compose cho local và VPS nên môi trường tái tạo được (NFR-06-05).
+- **VPS tự quản lý:** chi phí thấp, nhóm toàn quyền kiểm soát.
+- **Docker chỉ cho môi trường phát triển:** thành viên mới dựng được MySQL và các dịch vụ phụ trợ bằng một lệnh, không phải cài từng thứ (NFR-06-05).
+- **Không dùng Docker khi chạy thật:** bớt một tầng trung gian và tài nguyên trên VPS; nhóm vận hành trực tiếp các dịch vụ quen thuộc (Node.js, MySQL, nginx) và xem log, khởi động lại bằng công cụ của hệ điều hành.
 
 ## Hệ quả
 
@@ -82,6 +87,8 @@
 | TypeScript bản mới nhất có thể chưa tương thích hoàn toàn với decorator của NestJS | Chỉ dùng phiên bản TypeScript được NestJS và Next.js hỗ trợ chính thức; chốt và kiểm tra trong #16 |
 | Tự quản lý VPS: nhóm chịu trách nhiệm cập nhật bảo mật, sao lưu, theo dõi; một máy chủ duy nhất là điểm lỗi đơn | Sao lưu tự động và diễn tập khôi phục (NFR-11); theo dõi và cảnh báo (NFR-09); mục tiêu sẵn sàng 99,5% đã tính tới một máy chủ |
 | Next.js gọi API NestJS phía máy chủ cần chuyển tiếp cookie phiên đăng nhập | Thiết kế luồng xác thực trong #13 |
+| Môi trường phát triển (Docker) và môi trường thật (cài trực tiếp) có thể lệch phiên bản hoặc cấu hình, gây lỗi chỉ xuất hiện khi triển khai | Dùng cùng dòng phiên bản; môi trường kiểm thử trên VPS cài giống hệt môi trường thật và được triển khai thử trước mỗi lần phát hành; viết script hoặc tài liệu cài đặt lặp lại được (#18) |
+| Không có container nên việc cài đặt và nâng cấp trên VPS phải làm thủ công | Script cài đặt và triển khai có phiên bản trong repo (#18); trình quản lý tiến trình tự khởi động lại ứng dụng (NFR-03-02) |
 
 ## Phương án đã cân nhắc
 
@@ -91,6 +98,7 @@
 | PostgreSQL | Có sẵn `unaccent` và `pg_trgm` cho tìm kiếm không dấu; nhóm chọn MySQL. Yêu cầu giao dịch và toàn vẹn dữ liệu đều đáp ứng được với MySQL |
 | MySQL 8.4 LTS | Vẫn được hỗ trợ, nhưng 9.7 là dòng LTS mới hơn, thời gian hỗ trợ dài hơn cho dự án mới |
 | Caddy thay cho nginx | Tự cấp HTTPS đơn giản hơn; nhóm chọn nginx vì phổ biến và tài liệu đầy đủ. HTTPS dùng Let's Encrypt với nginx |
+| Dùng Docker cho cả môi trường thật | Môi trường giống hệt nhau giữa các nơi chạy; nhóm chọn cài trực tiếp để bớt tầng trung gian và tài nguyên trên VPS, và vận hành bằng công cụ quen thuộc |
 | Dịch vụ cloud quản lý sẵn (PaaS) | Giảm công vận hành nhưng chi phí cao hơn và phụ thuộc nhà cung cấp; nhóm chọn VPS tự quản lý |
 
 ## Nguồn tra cứu phiên bản (28/11/2026)
